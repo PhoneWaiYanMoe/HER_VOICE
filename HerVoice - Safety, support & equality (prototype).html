@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HerVoice – Safety, support &amp; equality</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@1,500&family=Noto+Sans+Myanmar:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--p:#8B5BBF;--pd:#5C3585;--pl:#EFE6F8;--r:#C97BB2;--rl:#F7EDF4;--t:#3D7874;--tl:#E6F3F2;--bg:#FAF6FD;--sf:#fff;--tx:#2D1840;--mu:#7A5C92;--bd:rgba(139,91,191,.18);--al:#B3261E;--alb:#FDECEA;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--p:#B48BE0;--pd:#D9C2F2;--pl:#2E1F42;--rl:#3A2234;--tl:#1D3331;--t:#8FD0CA;--bg:#150C20;--sf:#211330;--tx:#F2E9FA;--mu:#B79ACC;--bd:rgba(180,139,224,.22);--al:#FF8A80;--alb:#3A1B1B}}
+:root[data-theme="dark"]{--p:#B48BE0;--pd:#D9C2F2;--pl:#2E1F42;--rl:#3A2234;--tl:#1D3331;--t:#8FD0CA;--bg:#150C20;--sf:#211330;--tx:#F2E9FA;--mu:#B79ACC;--bd:rgba(180,139,224,.22);--al:#FF8A80;--alb:#3A1B1B}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:'DM Sans','Noto Sans Myanmar',sans-serif;background:var(--bg);color:var(--tx);line-height:1.5;font-size:15px;min-height:100vh}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--p);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sf);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;padding:10px 16px;flex-wrap:wrap}
+.brand{font-family:'Playfair Display',serif;font-style:italic;font-size:24px;color:var(--pd);margin-right:auto}
+.seg{display:flex;border:1px solid var(--bd);border-radius:30px;padding:3px}
+.seg button{border:0;background:none;padding:5px 11px;border-radius:30px;font-size:13px;color:var(--mu)}
+.seg button[aria-pressed=true]{background:var(--p);color:#fff}
+.hb{border:1px solid var(--bd);background:var(--sf);border-radius:30px;padding:7px 14px;font-size:13px;font-weight:600}
+.hb.sos{background:var(--al);color:#fff;border-color:var(--al)}
+:root[data-theme="dark"] .hb.sos,:root:not([data-theme="light"]) .hb.sos{color:#2a0a08}
+.shell{display:block}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:20;background:var(--sf);border-top:1px solid var(--bd);display:flex;justify-content:space-around;padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;color:var(--mu);padding:4px 12px}
+nav button[aria-current=page]{color:var(--p);font-weight:600}
+nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+main{padding:16px 16px 96px;max-width:760px;margin:0 auto}
+.view{display:none}.view.on{display:block}
+h2{font-size:22px;margin-bottom:2px}
+.sub{color:var(--mu);margin-bottom:14px}
+.note{background:var(--tl);color:var(--t);border-radius:12px;padding:10px 14px;font-size:13px;margin-bottom:14px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chip{border:1px solid var(--bd);background:var(--sf);border-radius:20px;padding:5px 12px;font-size:13px;color:var(--mu)}
+.chip[aria-pressed=true]{background:var(--p);border-color:var(--p);color:#fff}
+.tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:20px;background:var(--pl);color:var(--pd);margin-right:4px}
+.meta{font-size:12px;color:var(--mu)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.btn{border:0;border-radius:24px;padding:9px 18px;background:var(--p);color:#fff;font-weight:600;font-size:14px}
+:root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#1a0b2a}
+.btn.ghost{background:none;border:1px solid var(--bd);color:var(--tx)}
+.btn.done{background:var(--tl);color:var(--t)}
+.link{background:none;border:0;color:var(--mu);font-size:13px;text-decoration:underline;padding:4px}
+textarea,input[type=text],input[type=search]{width:100%;border:1px solid var(--bd);background:var(--sf);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+textarea{min-height:90px;resize:vertical}
+.grid{display:grid;gap:10px}
+.avatar{display:inline-block;width:38px;height:38px;border-radius:50%;background:var(--rl);overflow:hidden;margin-right:8px;vertical-align:middle}.avatar svg,.ico svg{width:100%;height:100%;display:block}.ico{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center}.ico svg{width:24px;height:24px;fill:none;stroke-width:2;stroke-linecap:round}.cast{display:flex;justify-content:center;gap:28px;align-items:flex-end;margin:6px 0 22px}.cast figure{text-align:center;font-weight:600;color:var(--mu)}.cast svg{height:170px;width:auto;display:block;margin:0 auto 4px}.art{background:var(--pl);border-radius:10px;height:56px;display:grid;place-items:center;margin-bottom:8px}
+.hero{text-align:center;padding:36px 8px 10px}
+.hero h1{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(34px,8vw,56px);color:var(--pd);line-height:1.1;margin-bottom:12px}
+.hero p{color:var(--mu);max-width:46ch;margin:0 auto 20px}
+.pillars{display:grid;gap:10px;margin:22px 0}
+.dlg{position:fixed;inset:0;z-index:50;background:rgba(20,8,30,.55);display:none;align-items:flex-end;justify-content:center}
+.dlg.on{display:flex}
+.sheet{background:var(--sf);width:100%;max-width:520px;border-radius:22px 22px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));max-height:88vh;overflow:auto}
+.sheet.al{border-top:6px solid var(--al)}
+.num{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin:8px 0;background:var(--alb)}
+.num b{font-size:20px;color:var(--al)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--pd);color:#fff;border-radius:24px;padding:9px 18px;font-size:14px;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}
+:root[data-theme="dark"] .toast,:root:not([data-theme="light"]) .toast{background:var(--p);color:#1a0b2a}
+.toast.on{opacity:1}
+#neutral{position:fixed;inset:0;z-index:100;background:#fff;color:#222;display:none;padding:40px 24px;font-family:Georgia,serif}
+#neutral.on{display:block}
+.set{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--bd)}
+@media(min-width:900px){
+ nav{top:58px;bottom:0;right:auto;width:210px;flex-direction:column;justify-content:flex-start;gap:6px;padding:20px 12px;border-top:0;border-right:1px solid var(--bd)}
+ nav button{flex-direction:row;gap:12px;font-size:15px;padding:11px 14px;border-radius:12px;width:100%}
+ nav button[aria-current=page]{background:var(--pl)}
+ main{margin-left:210px;max-width:none;padding:28px 40px 60px}
+ .wrap{max-width:900px}
+ .grid.two{grid-template-columns:1fr 1fr}
+ .pillars{grid-template-columns:repeat(3,1fr)}
+ .dlg{align-items:center}.sheet{border-radius:22px}
+ .toast{bottom:30px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+ <span class="brand">HerVoice</span>
+ <div class="seg" role="group" aria-label="Language" id="langs"></div>
+ <button class="hb sos" id="sosBtn" data-i="sos"></button>
+ <button class="hb" id="qeBtn" data-i="qe"></button>
+</header>
+<nav id="nav" aria-label="Main"></nav>
+<main><div class="wrap">
+ <section class="view on" id="v-home"></section>
+ <section class="view" id="v-space"></section>
+ <section class="view" id="v-hub"></section>
+ <section class="view" id="v-learn"></section>
+ <section class="view" id="v-me"></section>
+</div></main>
+
+<div class="dlg" id="sosDlg" role="dialog" aria-modal="true"><div class="sheet al" id="sosBody"></div></div>
+<div class="dlg" id="artDlg" role="dialog" aria-modal="true"><div class="sheet" id="artBody"></div></div>
+<div class="dlg" id="cmpDlg" role="dialog" aria-modal="true"><div class="sheet" id="cmpBody"></div></div>
+<div id="neutral" tabindex="0"><h1 style="font-weight:normal">Weather</h1><p style="margin-top:12px">Today: partly cloudy, 31°C</p><p style="margin-top:30px;color:#999;font-size:13px" id="nHint"></p></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const S={
+en:{sos:'Emergency',qe:'Quick exit',n:['Home','SafeSpace','Support Hub','Learn','Me'],
+ h1:'Speak. Connect. Be safe.',hp:'A free, anonymous place to find verified support, talk with peers, and learn about your rights.',
+ join:'Continue anonymously',joined:'You are Linh #3041. No name or email needed.',
+ p:[['SafeSpace','Share and ask anonymously. Peers reply, volunteers moderate.'],['Support Hub','Verified NGOs, hotlines, counselling and legal aid in one list.'],['Learn','Plain guides on rights, healthy relationships and prevention.']],
+ disc:'Peer support is not counselling, legal advice or emergency help. In danger now? Tap Emergency.',
+ ss:'SafeSpace',ssSub:'You are not alone.',all:'All',tags:{share:'Share',lgbtq:'LGBTQ+',support:'Support',safety:'Safety',equality:'Equality'},
+ compose:'Share something anonymously…',cpTitle:'Share anonymously',cpHint:'Don’t include your real name, address or phone number.',post:'Post',cancel:'Cancel',
+ posted:'Shared anonymously',reply:'Reply',replied:'Reply sent',report:'Report',reported:'Reported. A moderator will review it.',hold:'Posts are checked against the community guidelines before everyone sees them.',
+ hub:'Support Hub',hubSub:'Organisations from Vietnam you can reach.',search:'Search services…',connect:'Contact',saved:'Saved',verified:'Verified',chk:'Last checked',
+ L:'Learn',LSub:'Short guides, written locally.',read:'Min read',save:'Save',close:'Close',
+ me:'Me',meSub:'Your privacy settings',s:[['Anonymous mode','Always on. Only an alias is stored.'],['Quick exit','Press Esc twice to leave fast.'],['Dark mode','Follows your device, or switch here.']],
+ qeNote:'Quick exit hides this screen. It cannot erase browser history or device traces.',
+ sosT:'Emergency contacts',sosP:'If you are in immediate danger, call now.',sosV:'Numbers shown are for the demo. Partners verify them before launch.',
+ nh:'Tap to return',pol:'Police',amb:'Ambulance',off:'Dark',on:'Light',
+ stats:['Posts','Saved','Contacts'],alias:'You appear as Linh or Mya, never your real name.',alt:{linh:'Linh, a HerVoice mascot with dark hair and a purple outfit',mya:'Mya, a HerVoice mascot with a hair bun and a pink outfit'},partner:'Partner details are examples. Each service is verified with the organisation before launch.',web:'Contact details are shown once the partner confirms them.'},
+vi:{sos:'Khẩn cấp',qe:'Thoát nhanh',n:['Trang chủ','SafeSpace','Hỗ trợ','Học hỏi','Tôi'],
+ h1:'Lên tiếng. Kết nối. An toàn.',hp:'Nơi miễn phí, ẩn danh để tìm hỗ trợ đã xác minh, trò chuyện cùng bạn bè đồng cảnh và tìm hiểu quyền của mình.',
+ join:'Tiếp tục ẩn danh',joined:'Bạn là Linh #3041. Không cần tên hay email.',
+ p:[['SafeSpace','Chia sẻ và hỏi ẩn danh. Bạn bè phản hồi, tình nguyện viên kiểm duyệt.'],['Trung tâm hỗ trợ','NGO, đường dây nóng, tư vấn và pháp lý đã xác minh trong một danh sách.'],['Học hỏi','Hướng dẫn dễ hiểu về quyền, mối quan hệ lành mạnh và phòng ngừa.']],
+ disc:'Hỗ trợ đồng đẳng không thay thế tư vấn, pháp lý hay cấp cứu. Đang gặp nguy hiểm? Bấm Khẩn cấp.',
+ ss:'SafeSpace',ssSub:'Bạn không đơn độc.',all:'Tất cả',tags:{share:'Chia sẻ',lgbtq:'LGBTQ+',support:'Hỗ trợ',safety:'An toàn',equality:'Bình đẳng'},
+ compose:'Chia sẻ điều gì đó ẩn danh…',cpTitle:'Chia sẻ ẩn danh',cpHint:'Đừng ghi tên thật, địa chỉ hay số điện thoại.',post:'Đăng',cancel:'Hủy',
+ posted:'Đã chia sẻ ẩn danh',reply:'Phản hồi',replied:'Đã gửi phản hồi',report:'Báo cáo',reported:'Đã báo cáo. Người kiểm duyệt sẽ xem xét.',hold:'Bài viết được kiểm tra theo quy tắc cộng đồng trước khi mọi người nhìn thấy.',
+ hub:'Trung tâm hỗ trợ',hubSub:'Các tổ chức tại Việt Nam bạn có thể liên hệ.',search:'Tìm dịch vụ…',connect:'Liên hệ',saved:'Đã lưu',verified:'Đã xác minh',chk:'Kiểm tra lần cuối',
+ L:'Học hỏi',LSub:'Hướng dẫn ngắn, viết cho địa phương.',read:'phút đọc',save:'Lưu',close:'Đóng',
+ me:'Tôi',meSub:'Cài đặt riêng tư',s:[['Chế độ ẩn danh','Luôn bật. Chỉ lưu bí danh.'],['Thoát nhanh','Nhấn Esc hai lần để thoát nhanh.'],['Chế độ tối','Theo thiết bị, hoặc đổi tại đây.']],
+ qeNote:'Thoát nhanh chỉ che màn hình này. Không xóa được lịch sử trình duyệt hay dấu vết thiết bị.',
+ sosT:'Liên hệ khẩn cấp',sosP:'Nếu đang gặp nguy hiểm ngay lúc này, hãy gọi ngay.',sosV:'Số điện thoại chỉ là bản demo. Đối tác sẽ xác minh trước khi ra mắt.',
+ nh:'Chạm để quay lại',pol:'Công an',amb:'Cấp cứu',off:'Tối',on:'Sáng',
+ stats:['Bài đăng','Đã lưu','Liên hệ'],alias:'Bạn xuất hiện là Linh hoặc Mya, không bao giờ là tên thật.',alt:{linh:'Linh, linh vật HerVoice tóc đen, mặc đồ tím',mya:'Mya, linh vật HerVoice búi tóc, mặc đồ hồng'},partner:'Thông tin đối tác chỉ là ví dụ. Mỗi dịch vụ sẽ được xác minh với tổ chức trước khi ra mắt.',web:'Thông tin liên hệ sẽ hiển thị khi đối tác xác nhận.'},
+my:{sos:'အရေးပေါ်',qe:'အမြန်ထွက်',n:['ပင်မ','SafeSpace','ကူညီရေး','လေ့လာ','ကျွန်ုပ်'],
+ h1:'ပြောပါ။ ချိတ်ဆက်ပါ။ ဘေးကင်းပါ။',hp:'အထောက်အပံ့ရှာရန်၊ အပြန်အလှန်ပြောဆိုရန်၊ သင့်အခွင့်အရေးများ သိရှိရန် အခမဲ့ အမည်မသိနေရာ။',
+ join:'အမည်မဖော်ဘဲ ဆက်သွားမည်',joined:'သင်သည် Linh #3041 ဖြစ်သည်။ အမည် သို့မဟုတ် အီးမေးလ် မလိုပါ။',
+ p:[['SafeSpace','အမည်မဖော်ဘဲ မျှဝေ၊ မေးမြန်းပါ။ လုပ်ဖော်ကိုင်ဖက်များ ပြန်ကြားပါသည်။'],['ကူညီရေးဌာန','အတည်ပြုထားသော NGO၊ ဟော့လိုင်း၊ အကြံပေးနှင့် ဥပဒေအကူအညီ။'],['လေ့လာရန်','အခွင့်အရေး၊ ကျန်းမာသောဆက်ဆံရေးနှင့် ကာကွယ်ရေး လမ်းညွှန်များ။']],
+ disc:'ဤနေရာသည် အကြံပေးခြင်း၊ ဥပဒေအကြံ သို့မဟုတ် အရေးပေါ်ကူညီမှု မဟုတ်ပါ။ အန္တရာယ်ရှိပါက အရေးပေါ်ကို နှိပ်ပါ။',
+ ss:'SafeSpace',ssSub:'သင်တစ်ယောက်တည်း မဟုတ်ပါ။',all:'အားလုံး',tags:{share:'မျှဝေ',lgbtq:'LGBTQ+',support:'ပံ့ပိုး',safety:'ဘေးကင်း',equality:'ညီမျှမှု'},
+ compose:'အမည်မဖော်ဘဲ တစ်ခုခု မျှဝေပါ…',cpTitle:'အမည်မဖော်ဘဲ မျှဝေရန်',cpHint:'အမည်အစစ်၊ လိပ်စာ၊ ဖုန်းနံပါတ် မထည့်ပါနှင့်။',post:'တင်မည်',cancel:'မလုပ်တော့ပါ',
+ posted:'အမည်မဖော်ဘဲ မျှဝေပြီး',reply:'ပြန်ကြား',replied:'ပြန်ကြားပြီး',report:'တိုင်ကြား',reported:'တိုင်ကြားပြီး။ စီမံသူက စစ်ဆေးပါမည်။',hold:'အားလုံးမမြင်မီ ပို့စ်များကို အသိုင်းအဝိုင်းစည်းမျဉ်းဖြင့် စစ်ဆေးပါသည်။',
+ hub:'ကူညီရေးဌာန',hubSub:'ဗီယက်နမ်ရှိ ဆက်သွယ်နိုင်သော အဖွဲ့အစည်းများ။',search:'ဝန်ဆောင်မှု ရှာရန်…',connect:'ဆက်သွယ်',saved:'သိမ်းပြီး',verified:'အတည်ပြုပြီး',chk:'နောက်ဆုံးစစ်ဆေး',
+ L:'လေ့လာရန်',LSub:'ဒေသဆိုင်ရာ အတိုလမ်းညွှန်များ။',read:'မိနစ်',save:'သိမ်းမည်',close:'ပိတ်မည်',
+ me:'ကျွန်ုပ်',meSub:'ကိုယ်ရေးလုံခြုံမှု ဆက်တင်',s:[['အမည်မသိမုဒ်','အမြဲဖွင့်ထားသည်။ အမည်ဝှက်သာ သိမ်းသည်။'],['အမြန်ထွက်','Esc နှစ်ကြိမ်နှိပ်ပါ။'],['အမှောင်မုဒ်','စက်အတိုင်း သို့မဟုတ် ဤနေရာတွင် ပြောင်းပါ။']],
+ qeNote:'အမြန်ထွက်သည် ဤစခရင်ကို ဝှက်ပေးသည်။ ဘရောက်ဇာမှတ်တမ်းကို မဖျက်နိုင်ပါ။',
+ sosT:'အရေးပေါ်ဆက်သွယ်ရန်',sosP:'ချက်ချင်းအန္တရာယ်ရှိပါက ယခုခေါ်ပါ။',sosV:'နံပါတ်များသည် နမူနာသာဖြစ်သည်။ မဖွင့်မီ မိတ်ဖက်များက အတည်ပြုမည်။',
+ nh:'ပြန်သွားရန် ထိပါ',pol:'ရဲ',amb:'လူနာတင်ယာဉ်',off:'မှောင်',on:'လင်း',
+ stats:['ပို့စ်','သိမ်း','ဆက်သွယ်'],alias:'သင်သည် Linh သို့မဟုတ် Mya အဖြစ် ပေါ်မည်၊ အမည်အစစ် မပေါ်ပါ။',alt:{linh:'Linh၊ ဆံပင်မည်း ခရမ်းရောင်ဝတ် HerVoice ကာတွန်းဇာတ်ကောင်',mya:'Mya၊ ဆံထုံးနှင့် ပန်းရောင်ဝတ် HerVoice ကာတွန်းဇာတ်ကောင်'},partner:'မိတ်ဖက်အချက်အလက်များသည် နမူနာသာ ဖြစ်သည်။ မဖွင့်မီ အဖွဲ့အစည်းနှင့် အတည်ပြုမည်။',web:'မိတ်ဖက်က အတည်ပြုပြီးမှ ဆက်သွယ်ရန်အချက်အလက် ပြမည်။'}
+};
+S.my.amb='လူနာတင်ယာဉ်';
+const L3=(a,b,c)=>({en:a,vi:b,my:c});
+const POSTS=[
+ {id:1,tag:'safety',w:'2h',t:L3('I feel unsafe walking home at night. Has anyone had similar experiences?','Tôi thấy không an toàn khi đi bộ về nhà ban đêm. Ai từng gặp tình huống tương tự không?','ညဘက်အိမ်ပြန်လမ်းလျှောက်ရင် မလုံခြုံဘူးလို့ ခံစားရတယ်။ ဒီလိုအတွေ့အကြုံ ရှိဖူးသလား။')},
+ {id:2,tag:'lgbtq',w:'5h',t:L3('Being myself at work is hard. Does anyone know supportive workplaces in HCMC?','Làm chính mình ở nơi làm việc thật khó. Ai biết công ty thân thiện ở TP.HCM không?','အလုပ်မှာ ကိုယ်တိုင်ဖြစ်နေဖို့ ခက်တယ်။ ဟိုချီမင်းမှာ ထောက်ခံတဲ့ကုမ္ပဏီ သိသလား။')},
+ {id:3,tag:'support',w:'1d',t:L3('A friend told me about a free counselling line. It helped me take the first step.','Một người bạn giới thiệu đường dây tư vấn miễn phí. Nó giúp tôi bước đi bước đầu tiên.','သူငယ်ချင်းက အခမဲ့အကြံပေးလိုင်း ပြောပြတယ်။ ပထမခြေလှမ်းလှမ်းဖို့ ကူညီခဲ့တယ်။')}];
+const ORGS=[
+ {id:1,k:['lgbtq','counsel'],n:'ICS Vietnam',d:L3('LGBTQ+ counselling & safe social events in HCMC','Tư vấn LGBTQ+ & sự kiện xã hội an toàn tại TPHCM','HCMC တွင် LGBTQ+ အကြံဉာဏ်ပေးခြင်း & လုံခြုံသော ပြဇာတ်များ'),ic:'<path d="M22 8.5A7.5 7.5 0 0 0 8 4.5"/><path d="M2 15.5A7.5 7.5 0 0 0 16 19.5"/><circle cx="12" cy="12" r="3"/>',c:'#8B5BBF',bg:'#EEE6F8'},
+ {id:2,k:['women','legal'],n:'CSAGA',d:L3('Gender-based violence prevention & women’s rights','Phòng chống bạo lực giới & quyền phụ nữ','လိင်ပိုင်းဆိုင်ရာ အကြမ်းဖက်မှု ကာကွယ်ခြင်း & အမျိုးသမီးအခွင့်အရေး'),ic:'<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',c:'#C97BB2',bg:'#F7EDF4'},
+ {id:3,k:['support','emergency'],n:'Blue Dragon Foundation',d:L3('Support for at-risk women & trafficking survivors','Hỗ trợ phụ nữ có nguy cơ & nạn nhân buôn bán người','မိမိ ဘေးအန္တရာယ်ကျရောက်နိုင်သည့် အမျိုးသမီးများ ပံ့ပိုး'),ic:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>',c:'#3D7874',bg:'#E6F3F2'}];
+const KN={lgbtq:L3('LGBTQ+','LGBTQ+','LGBTQ+'),counsel:L3('Counselling','Tư vấn','အကြံဉာဏ်'),women:L3('Women','Phụ nữ','အမျိုးသမီးများ'),legal:L3('Legal','Pháp lý','ဥပဒေ'),support:L3('Support','Hỗ trợ','ပံ့ပိုးကူညီမှု'),emergency:L3('Emergency','Khẩn cấp','အရေးပေါ်')};
+const LINH="<ellipse cx=\"27\" cy=\"71\" rx=\"12\" ry=\"4\" fill=\"#C4A0E0\" opacity=\"0.25\"/> <path d=\"M17 46 Q10 55 8 70 L22 70 L25 50Z\" fill=\"#7B3FA6\"/> <path d=\"M37 46 Q44 55 46 70 L32 70 L29 50Z\" fill=\"#7B3FA6\"/> <rect x=\"19\" y=\"44\" width=\"16\" height=\"26\" rx=\"3\" fill=\"#9B5CC8\"/> <path d=\"M22 44 Q27 42 32 44 L31 48 Q27 46 23 48Z\" fill=\"#C084D4\"/> <path d=\"M19 46 Q12 50 10 58\" stroke=\"#9B5CC8\" stroke-width=\"5\" stroke-linecap=\"round\" fill=\"none\"/> <path d=\"M35 46 Q42 50 44 58\" stroke=\"#9B5CC8\" stroke-width=\"5\" stroke-linecap=\"round\" fill=\"none\"/> <circle cx=\"27\" cy=\"56\" r=\"2\" fill=\"#C084D4\" opacity=\"0.5\"/> <ellipse cx=\"27\" cy=\"31\" rx=\"12\" ry=\"13\" fill=\"#F5CBA7\"/> <ellipse cx=\"22.5\" cy=\"30\" rx=\"1.4\" ry=\"1.8\" fill=\"#2D1B3D\"/> <ellipse cx=\"31.5\" cy=\"30\" rx=\"1.4\" ry=\"1.8\" fill=\"#2D1B3D\"/> <circle cx=\"23.2\" cy=\"29.3\" r=\"0.5\" fill=\"white\"/> <circle cx=\"32.2\" cy=\"29.3\" r=\"0.5\" fill=\"white\"/> <path d=\"M24 36 Q27 39 30 36\" stroke=\"#C07060\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\"/> <path d=\"M15 26 Q14 17 22 18 Q27 14 32 18 Q40 17 39 26\" fill=\"#3D2050\"/> <path d=\"M28 16 Q36 8 43 14 Q40 22 34 20 Q30 18 28 18Z\" fill=\"#5C3585\"/> <line x1=\"38\" y1=\"12\" x2=\"32\" y2=\"20\" stroke=\"#C97BB2\" stroke-width=\"1.5\" stroke-linecap=\"round\"/> <circle cx=\"38\" cy=\"12\" r=\"1.5\" fill=\"#E8A8D8\"/>",MYA="<ellipse cx=\"27\" cy=\"71\" rx=\"12\" ry=\"4\" fill=\"#C4A0E0\" opacity=\"0.25\"/> <path d=\"M18 42 Q10 53 9 70 L22 70 L24 48Z\" fill=\"#E8A8D8\"/> <path d=\"M36 42 Q44 53 45 70 L32 70 L30 48Z\" fill=\"#E8A8D8\"/> <rect x=\"18\" y=\"40\" width=\"18\" height=\"30\" rx=\"4\" fill=\"#F0C8E0\"/> <path d=\"M22 40 Q27 38 32 40 L32 44 Q27 42 22 44Z\" fill=\"#E8A8D8\"/> <path d=\"M17 42 Q10 46 9 54\" stroke=\"#E8A8D8\" stroke-width=\"4\" stroke-linecap=\"round\" fill=\"none\"/> <path d=\"M37 42 Q44 46 45 54\" stroke=\"#E8A8D8\" stroke-width=\"4\" stroke-linecap=\"round\" fill=\"none\"/> <ellipse cx=\"27\" cy=\"28\" rx=\"12\" ry=\"13\" fill=\"#F5CBA7\"/> <ellipse cx=\"20\" cy=\"30\" rx=\"3\" ry=\"2\" fill=\"#E8D5A0\" opacity=\"0.6\"/> <ellipse cx=\"34\" cy=\"30\" rx=\"3\" ry=\"2\" fill=\"#E8D5A0\" opacity=\"0.6\"/> <ellipse cx=\"22.5\" cy=\"27\" rx=\"1.4\" ry=\"1.8\" fill=\"#2D1B3D\"/> <ellipse cx=\"31.5\" cy=\"27\" rx=\"1.4\" ry=\"1.8\" fill=\"#2D1B3D\"/> <circle cx=\"23.2\" cy=\"26.3\" r=\"0.5\" fill=\"white\"/> <circle cx=\"32.2\" cy=\"26.3\" r=\"0.5\" fill=\"white\"/> <path d=\"M24 33 Q27 36 30 33\" stroke=\"#C07060\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\"/> <path d=\"M15 22 Q27 10 39 22\" fill=\"#2D1B3D\"/> <ellipse cx=\"27\" cy=\"14\" rx=\"8\" ry=\"9\" fill=\"#3D2050\"/> <circle cx=\"20\" cy=\"17\" r=\"2.5\" fill=\"white\"/> <circle cx=\"19\" cy=\"17\" r=\"1\" fill=\"#FFEE99\"/> <circle cx=\"21\" cy=\"17\" r=\"1\" fill=\"#FFEE99\"/> <circle cx=\"20\" cy=\"16\" r=\"1\" fill=\"#FFEE99\"/> <circle cx=\"20\" cy=\"18\" r=\"1\" fill=\"#FFEE99\"/> <circle cx=\"34\" cy=\"17\" r=\"2.5\" fill=\"white\"/> <circle cx=\"33\" cy=\"17\" r=\"1\" fill=\"#FFEE99\"/> <circle cx=\"35\" cy=\"17\" r=\"1\" fill=\"#FFEE99\"/> <circle cx=\"34\" cy=\"16\" r=\"1\" fill=\"#FFEE99\"/> <circle cx=\"34\" cy=\"18\" r=\"1\" fill=\"#FFEE99\"/>";
+const ARTSVG=["<svg width=\"56\" height=\"40\" viewBox=\"0 0 52 36\" fill=\"none\"><rect x=\"2\" y=\"26\" width=\"10\" height=\"8\" rx=\"2\" fill=\"#8B5BBF\" opacity=\"0.4\"/><rect x=\"16\" y=\"18\" width=\"10\" height=\"16\" rx=\"2\" fill=\"#8B5BBF\" opacity=\"0.6\"/><rect x=\"30\" y=\"10\" width=\"10\" height=\"24\" rx=\"2\" fill=\"#8B5BBF\" opacity=\"0.8\"/><rect x=\"40\" y=\"4\" width=\"10\" height=\"30\" rx=\"2\" fill=\"#8B5BBF\"/><path d=\"M2 26 Q11 18 20 18 Q30 18 34 10\" stroke=\"#C97BB2\" stroke-width=\"1.5\" fill=\"none\"/></svg>", "<svg width=\"56\" height=\"40\" viewBox=\"0 0 44 36\" fill=\"none\"><circle cx=\"22\" cy=\"18\" r=\"12\" fill=\"none\" stroke=\"#C97BB2\" stroke-width=\"1.5\"/><circle cx=\"22\" cy=\"18\" r=\"6\" fill=\"#E8A8D8\" opacity=\"0.35\"/><path d=\"M22 6V30 M10 18H34\" stroke=\"#C97BB2\" stroke-width=\"1\" opacity=\"0.35\"/><circle cx=\"22\" cy=\"18\" r=\"2.5\" fill=\"#C97BB2\" opacity=\"0.5\"/></svg>", "<svg width=\"56\" height=\"40\" viewBox=\"0 0 48 36\" fill=\"none\"><rect x=\"4\" y=\"6\" width=\"40\" height=\"24\" rx=\"4\" fill=\"none\" stroke=\"#6AADA8\" stroke-width=\"1.5\"/><path d=\"M12 16H22 M12 21H28\" stroke=\"#6AADA8\" stroke-width=\"1.5\" stroke-linecap=\"round\"/><circle cx=\"38\" cy=\"16\" r=\"5\" fill=\"#6AADA8\" opacity=\"0.15\" stroke=\"#6AADA8\" stroke-width=\"1\"/><path d=\"M35 16L37 18L41 14\" stroke=\"#6AADA8\" stroke-width=\"1\" stroke-linecap=\"round\"/></svg>"];
+function mas(w,big){const b=w=='linh'?LINH:MYA,n=w=='linh'?'Linh':'Mya';
+ return `<svg viewBox="${big?'0 0 54 76':'8 4 38 38'}" fill="none" role="img" aria-label="${t().alt[w]}">${b}</svg>`}
+const ARTS=[
+ {tag:L3('Healthy relationships','Mối quan hệ lành mạnh','ကျန်းမာသောဆက်ဆံရေး'),m:4,t:L3('Spotting early signs of controlling behaviour','Nhận biết sớm dấu hiệu kiểm soát','ထိန်းချုပ်မှုအချက်ပြများ စောစီးသိရှိခြင်း'),b:L3('Controlling behaviour often starts small: checking your phone, deciding who you see, or making you feel guilty for having plans. Noticing the pattern early gives you more options. Talk to someone you trust or a Support Hub service.','Hành vi kiểm soát thường bắt đầu nhỏ: kiểm tra điện thoại, quyết định bạn gặp ai, hoặc khiến bạn thấy có lỗi khi có kế hoạch riêng. Nhận ra sớm giúp bạn có nhiều lựa chọn hơn. Hãy nói với người bạn tin hoặc một dịch vụ trong Trung tâm hỗ trợ.','ထိန်းချုပ်မှုသည် ဖုန်းစစ်ခြင်း၊ ဘယ်သူနဲ့တွေ့ရမည်ဆုံးဖြတ်ခြင်းတို့ဖြင့် စတတ်သည်။ စောစောသိလျှင် ရွေးချယ်စရာပိုရှိသည်။ ယုံကြည်ရသူ သို့မဟုတ် ကူညီရေးဌာနနှင့် ပြောပါ။')},
+ {tag:L3('Your rights','Quyền của bạn','သင့်အခွင့်အရေး'),m:6,t:L3('What the law says about domestic violence','Pháp luật nói gì về bạo lực gia đình','အိမ်တွင်းအကြမ်းဖက်မှုအကြောင်း ဥပဒေ'),b:L3('Domestic violence includes physical, emotional and economic abuse. You can ask for protection and support. This is an overview, not legal advice. A legal-aid partner can explain your situation.','Bạo lực gia đình gồm bạo lực thể chất, tinh thần và kinh tế. Bạn có thể yêu cầu bảo vệ và hỗ trợ. Đây là thông tin chung, không phải tư vấn pháp lý. Đối tác trợ giúp pháp lý có thể giải thích trường hợp của bạn.','အိမ်တွင်းအကြမ်းဖက်မှုတွင် ရုပ်ပိုင်း၊ စိတ်ပိုင်းနှင့် စီးပွားရေးအကြမ်းဖက်မှု ပါဝင်သည်။ ကာကွယ်မှုတောင်းနိုင်သည်။ ဥပဒေအကြံမဟုတ်ပါ။')},
+ {tag:L3('Safety planning','Lập kế hoạch an toàn','ဘေးကင်းရေးစီမံကိန်း'),m:5,t:L3('A simple safety plan you can make today','Kế hoạch an toàn đơn giản bạn có thể làm hôm nay','ယနေ့ ပြုလုပ်နိုင်သော ဘေးကင်းရေးအစီအစဉ်'),b:L3('Keep important numbers memorised, pick a safe place to go, and keep a bag with ID and essentials with someone you trust. Adjust it to your situation.','Ghi nhớ các số quan trọng, chọn nơi an toàn để đến, và gửi một túi giấy tờ, đồ cần thiết cho người bạn tin. Điều chỉnh theo hoàn cảnh của bạn.','အရေးကြီးနံပါတ်များ ကျက်ထားပါ၊ သွားစရာနေရာရွေးပါ၊ မှတ်ပုံတင်နှင့် လိုအပ်ပစ္စည်းအိတ်ကို ယုံကြည်သူထံ ထားပါ။')}];
+const NUMS={vi:[['113','pol'],['115','amb']],my:[['199','pol'],['192','amb']]};
+const IC=['<path d="M3 11l9-8 9 8M5 10v10h14V10"/>','<path d="M21 12a8 8 0 01-11.6 7L4 20l1.2-4.5A8 8 0 1121 12z"/>','<path d="M12 21s-7-5.3-7-11a4 4 0 017-2.6A4 4 0 0119 10c0 5.7-7 11-7 11z"/>','<path d="M4 5h6a2 2 0 012 2v13a2 2 0 00-2-2H4zM20 5h-6a2 2 0 00-2 2v13a2 2 0 012-2h6z"/>','<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'];
+const V=['home','space','hub','learn','me'];
+let lang='en',view='home',tag='all',cat='all',q='',joined=false,saved=new Set(),contacted=new Set(),mine=[],reported=new Set(),my=0;
+const $=id=>document.getElementById(id);
+const t=()=>S[lang];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('on'),2200)}
+function setLang(l){lang=l;render()}
+function setTag(k){tag=k;space()}
+function setCat(k){cat=k;hub()}
+function go(v){view=v;render()}
+function render(){
+ const s=t();document.documentElement.lang=lang;
+ $('langs').innerHTML=['en','vi','my'].map(l=>`<button aria-pressed="${l==lang}" onclick="setLang('${l}')">${{en:'EN',vi:'VI',my:'မြန်မာ'}[l]}</button>`).join('');
+ document.querySelectorAll('[data-i]').forEach(e=>e.textContent=s[e.dataset.i]);
+ $('nav').innerHTML=V.map((v,i)=>`<button ${v==view?'aria-current="page"':''} onclick="go('${v}')"><svg viewBox="0 0 24 24" aria-hidden="true">${IC[i]}</svg>${s.n[i]}</button>`).join('');
+ document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id=='v-'+view));
+ $('nHint').textContent=s.nh;
+ home();space();hub();learn();me();
+}
+function home(){const s=t();
+ $('v-home').innerHTML=`<div class="hero"><h1>${s.h1}</h1><p>${s.hp}</p>
+ <div class="cast"><figure>${mas('linh',1)}Linh 🇻🇳</figure><figure>${mas('mya',1)}Mya 🇲🇲</figure></div><p class="meta" style="margin:-8px 0 16px">${s.alias}</p>
+ <button class="btn" onclick="joined=true;toast(t().joined);go('space')">${s.join}</button></div>
+ <div class="pillars">${s.p.map((p,i)=>`<button class="card" style="text-align:left" onclick="go('${V[i+1]}')"><b>${p[0]}</b><div class="meta" style="font-size:14px">${p[1]}</div></button>`).join('')}</div>
+ <p class="note">${s.disc}</p>`}
+function space(){const s=t();
+ const all=[...mine,...POSTS].filter(p=>tag=='all'||p.tag==tag);
+ $('v-space').innerHTML=`<h2>${s.ss}</h2><p class="sub">${s.ssSub}</p><p class="note">${s.disc}</p>
+ <div class="card"><button class="btn ghost" style="width:100%;text-align:left;border-radius:12px;color:var(--mu)" onclick="openCmp()">${s.compose}</button></div>
+ <div class="chips">${['all',...Object.keys(s.tags)].map(k=>`<button class="chip" aria-pressed="${k==tag}" onclick="setTag('${k}')">${k=='all'?s.all:s.tags[k]}</button>`).join('')}</div>
+ ${all.map(p=>`<article class="card"><span class="avatar">${mas(p.me||p.id%2?'linh':'mya')}</span><span class="tag">${s.tags[p.tag]}</span><span class="meta">${p.me?'':p.w}</span>
+ <p style="margin-top:8px">${p.me?esc(p.t):p.t[lang]}</p>
+ <div class="row"><button class="link" onclick="toast(t().replied)">${s.reply}</button>${p.me?'':`<button class="link" ${reported.has(p.id)?'disabled':''} onclick="reported.add(${p.id});toast(t().reported);space()">${reported.has(p.id)?'✓ ':''}${s.report}</button>`}</div></article>`).join('')}
+ <p class="meta">${s.hold}</p>`}
+function openCmp(){const s=t();$('cmpBody').innerHTML=`<h2>${s.cpTitle}</h2><p class="sub">${s.cpHint}</p><textarea id="cmT" aria-label="${s.cpTitle}"></textarea>
+ <div class="chips">${Object.keys(s.tags).map(k=>`<button class="chip" aria-pressed="${k==(openCmp.k||'share')}" onclick="openCmp.k='${k}';openCmp()">${s.tags[k]}</button>`).join('')}</div>
+ <div class="row"><button class="btn ghost" onclick="$('cmpDlg').classList.remove('on')">${s.cancel}</button><button class="btn" onclick="sendPost()">${s.post}</button></div>`;
+ $('cmpDlg').classList.add('on');$('cmT').focus()}
+function sendPost(){const v=$('cmT').value.trim();if(!v)return;mine.unshift({me:1,id:'m'+(my++),tag:openCmp.k||'share',t:v});$('cmpDlg').classList.remove('on');toast(t().posted);space()}
+function hub(){const s=t();
+ const list=ORGS.filter(o=>(cat=='all'||o.k.includes(cat))&&(o.n+o.d[lang]).toLowerCase().includes(q.toLowerCase()));
+ $('v-hub').innerHTML=`<h2>${s.hub}</h2><p class="sub">${s.hubSub}</p>
+ <input type="search" id="hq" placeholder="${s.search}" aria-label="${s.search}" value="${esc(q)}">
+ <div class="chips">${['all',...Object.keys(KN)].map(k=>`<button class="chip" aria-pressed="${k==cat}" onclick="setCat('${k}')">${k=='all'?s.all:KN[k][lang]}</button>`).join('')}</div>
+ <p class="note">${s.partner}</p><div class="grid two">${list.map(o=>`<article class="card" style="margin:0"><div style="display:flex;gap:12px"><span class="ico" style="background:${o.bg}" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="${o.c}">${o.ic}</svg></span><div><b>${o.n}</b><p class="meta" style="font-size:14px">${o.d[lang]}</p></div></div>
+ <div style="margin-top:8px">${o.k.map(k=>`<span class="tag">${KN[k][lang]}</span>`).join('')}<span class="tag" style="background:var(--tl);color:var(--t)">✓ ${s.verified}</span></div>
+ <div class="row"><span class="meta">${s.chk}: Oct 2026</span><button class="btn ${contacted.has(o.id)?'done':''}" onclick="contacted.add(${o.id});toast(t().connect+': '+ORGS[${o.id-1}].n);hub()">${contacted.has(o.id)?'✓ '+s.saved:s.connect}</button></div></article>`).join('')}</div><p class="meta" style="margin-top:10px">${s.web}</p>`;
+ const h=$('hq');h.oninput=()=>{q=h.value;const p=h.selectionStart;hub();const n=$('hq');n.focus();n.setSelectionRange(p,p)}}
+function learn(){const s=t();
+ $('v-learn').innerHTML=`<h2>${s.L}</h2><p class="sub">${s.LSub}</p><div class="grid two">${ARTS.map((a,i)=>`<button class="card" style="text-align:left;margin:0" onclick="openArt(${i})"><div class="art" aria-hidden="true">${ARTSVG[i]}</div><span class="tag">${a.tag[lang]}</span><p style="margin-top:6px"><b>${a.t[lang]}</b></p><span class="meta">${a.m} ${s.read}</span></button>`).join('')}</div>`}
+function openArt(i){const a=ARTS[i],s=t();$('artBody').innerHTML=`<span class="tag">${a.tag[lang]}</span><h2 style="margin-top:8px">${a.t[lang]}</h2><p style="margin:10px 0 16px">${a.b[lang]}</p><p class="note">${s.disc}</p><div class="row"><button class="btn ghost" onclick="$('artDlg').classList.remove('on')">${s.close}</button><button class="btn" onclick="saved.add(${i});toast(t().saved);$('artDlg').classList.remove('on');me()">${s.save}</button></div>`;$('artDlg').classList.add('on')}
+function me(){const s=t(),dark=document.documentElement.dataset.theme=='dark';
+ $('v-me').innerHTML=`<h2>${s.me}</h2><p class="sub">${s.meSub}</p>
+ <div class="card"><span class="avatar" style="width:56px;height:56px">${mas('linh')}</span><b>Linh #3041</b><div class="row" style="justify-content:space-around;text-align:center">${[mine.length,saved.size,contacted.size].map((n,i)=>`<div><b style="font-size:22px">${n}</b><div class="meta">${s.stats[i]}</div></div>`).join('')}</div></div>
+ <div class="card">${s.s.map((x,i)=>`<div class="set"><div><b>${x[0]}</b><div class="meta">${x[1]}</div></div>${i==2?`<button class="chip" onclick="toggleTheme()">${dark?s.on:s.off}</button>`:i==1?`<button class="chip" onclick="quickExit()">${s.qe}</button>`:'<span class="tag">✓</span>'}</div>`).join('')}</div>
+ <p class="note">${s.qeNote}</p>`}
+function toggleTheme(){const d=document.documentElement;const dark=d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=dark?'light':'dark';me()}
+function sos(){const s=t();const n=NUMS[lang=='my'?'my':'vi'];
+ $('sosBody').innerHTML=`<h2>${s.sosT}</h2><p class="sub">${s.sosP}</p>${n.map(x=>`<div class="num"><span>${s[x[1]]}</span><a href="tel:${x[0]}" style="text-decoration:none"><b>${x[0]}</b></a></div>`).join('')}<p class="meta" style="margin:10px 0 14px">${s.sosV}</p><button class="btn ghost" style="width:100%" onclick="$('sosDlg').classList.remove('on')">${s.close}</button>`;$('sosDlg').classList.add('on')}
+function quickExit(){$('neutral').classList.add('on');document.title='Weather'}
+$('neutral').onclick=()=>{$('neutral').classList.remove('on');document.title='HerVoice – Safety, support & equality'};
+$('qeBtn').onclick=quickExit;$('sosBtn').onclick=sos;
+document.querySelectorAll('.dlg').forEach(d=>d.addEventListener('click',e=>{if(e.target==d)d.classList.remove('on')}));
+let esc1=0;document.addEventListener('keydown',e=>{if(e.key!='Escape')return;document.querySelectorAll('.dlg.on').forEach(d=>d.classList.remove('on'));if(Date.now()-esc1<700)quickExit();esc1=Date.now()});
+render();
+</script>
+</body>
+</html>
