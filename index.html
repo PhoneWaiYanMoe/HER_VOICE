@@ -235,6 +235,7 @@ $('qeBtn').onclick=quickExit;$('sosBtn').onclick=sos;
 document.querySelectorAll('.dlg').forEach(d=>d.addEventListener('click',e=>{if(e.target==d)d.classList.remove('on')}));
 let esc1=0;document.addEventListener('keydown',e=>{if(e.key!='Escape')return;document.querySelectorAll('.dlg.on').forEach(d=>d.classList.remove('on'));if(Date.now()-esc1<700)quickExit();esc1=Date.now()});
 render();
+
 </script>
 </body>
 </html>
